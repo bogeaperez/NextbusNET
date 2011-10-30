@@ -1,0 +1,14 @@
+﻿<body copyright="All data copyright Toronto Transit Commission 2011.">
+  <predictions agencyTitle="Toronto Transit Commission" routeTitle="63-Ossington" routeTag="63" stopTitle="Ossington Avenue At Argyle Street" stopTag="2115">
+    <direction title="North - 63 Ossington towards Eglinton West Station">
+      <prediction epochTime="1319753439326" seconds="386" minutes="6" isDeparture="false" dirTag="63_1_63" vehicle="1616" block="63_10_100" tripTag="13345356"/>
+      <prediction epochTime="1319753538678" seconds="485" minutes="8" isDeparture="false" dirTag="63_1_63" vehicle="1638" block="63_13_132" tripTag="13345374"/>
+      <prediction epochTime="1319754075254" seconds="1021" minutes="17" isDeparture="false" affectedByLayover="true" dirTag="63_1_63" vehicle="1421" block="63_72_50" tripTag="13345357"/>
+      <prediction epochTime="1319754555254" seconds="1501" minutes="25" isDeparture="false" affectedByLayover="true" dirTag="63_1_63" vehicle="1018" block="63_4_40" tripTag="13345375"/>
+      <prediction epochTime="1319754975254" seconds="1921" minutes="32" isDeparture="false" affectedByLayover="true" dirTag="63_1_63" vehicle="1619" block="63_98_142" tripTag="13345376"/>
+    </direction>
+    <direction title="North - 63a Ossington towards St Clair">
+      <prediction epochTime="1319753262782" seconds="209" minutes="3" isDeparture="false" dirTag="63_1_63A" vehicle="1640" block="63_15_152" tripTag="13345373"/>
+    </direction>
+  </predictions>
+</body>

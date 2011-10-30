@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<body copyright="All data copyright agencies listed below and NextBus Inc 2011.">
+  <agency tag="actransit" title="AC Transit" regionTitle="California-Northern"/>
+  <agency tag="calu-pa" title="California University of Pennsylvania" regionTitle="Pennsylvania"/>
+  <agency tag="camarillo" title="Camarillo Area (CAT)" shortTitle="Camarillo (CAT)" regionTitle="California-Southern"/>
+  <agency tag="chapel-hill" title="Chapel Hill Transit" shortTitle="Chapel Hill" regionTitle="North Carolina"/>
+  <agency tag="charles-river" title="Charles River TMA - EZRide" shortTitle="Charles River EZRide" regionTitle="Massachusetts"/>
+  <agency tag="charm-city" title="Charm City Circulator" regionTitle="Maryland"/>
+  <agency tag="oxford-ms" title="City of Oxford" regionTitle="Mississippi"/>
+  <agency tag="collegetown" title="Collegetown Shuttle" regionTitle="Maryland"/>
+  <agency tag="dc-circulator" title="DC Circulator" regionTitle="District of Columbia"/>
+  <agency tag="da" title="Downtown Connection" regionTitle="New York"/>
+  <agency tag="glendale" title="Glendale Beeline" regionTitle="California-Southern"/>
+  <agency tag="south-coast" title="Gold Coast Transit" regionTitle="California-Southern"/>
+  <agency tag="lametro" title="Los Angeles Metro" regionTitle="California-Southern"/>
+  <agency tag="mbta" title="MBTA" regionTitle="Massachusetts"/>
+  <agency tag="mit" title="Massachusetts Institute of Technology" shortTitle="MIT" regionTitle="Massachusetts"/>
+  <agency tag="moorpark" title="Moorpark Transit" regionTitle="California-Southern"/>
+  <agency tag="brooklyn" title="NYC MTA - Brooklyn" regionTitle="New York"/>
+  <agency tag="sria" title="Pensacola Beach (SRIA)" shortTitle="SRIA" regionTitle="Florida"/>
+  <agency tag="portland-sc" title="Portland Streetcar" regionTitle="Oregon"/>
+  <agency tag="rutgers-newark" title="Rutgers Univ. Newark College Town Shuttle" shortTitle="Rutgers Newark Shuttle" regionTitle="New Jersey"/>
+  <agency tag="rutgers" title="Rutgers University" shortTitle="Rutgers" regionTitle="New Jersey"/>
+  <agency tag="sf-muni" title="San Francisco Muni" shortTitle="SF Muni" regionTitle="California-Northern"/>
+  <agency tag="seattle-sc" title="Seattle Streetcar" regionTitle="Washington"/>
+  <agency tag="simi-valley" title="Simi Valley (SVT)" regionTitle="California-Southern"/>
+  <agency tag="temple" title="Temple University" regionTitle="Pennsylvania"/>
+  <agency tag="thousand-oaks" title="Thousand Oaks Transit (TOT)" shortTitle="Thousand Oaks Transit" regionTitle="California-Southern"/>
+  <agency tag="ttc" title="Toronto Transit Commission" shortTitle="Toronto TTC" regionTitle="Ontario"/>
+  <agency tag="unitrans" title="Unitrans ASUCD/City of Davis" shortTitle="Unitrans" regionTitle="California-Northern"/>
+  <agency tag="umd" title="University of Maryland" regionTitle="Maryland"/>
+  <agency tag="vista" title="Ventura Intercity (VISTA)" shortTitle="Ventura (VISTA)" regionTitle="California-Southern"/>
+  <agency tag="wku" title="Western Kentucky University" regionTitle="Kentucky"/>
+</body>
