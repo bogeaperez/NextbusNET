@@ -65,6 +65,9 @@
     <Content Include="xml\agencies.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="xml\error.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="xml\predictions63_2115.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

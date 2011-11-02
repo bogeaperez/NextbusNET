@@ -10,11 +10,11 @@ namespace NextbusNET.Tests
     public class ParserTest
     {
         [Test]
-        public void TestRoutConfig()
+        public void ParseRouteConfig_should_return_valid_RouteConfig_object()
         {
             var parser = new Parser();
             var text = File.ReadAllText("xml\\routeConfig63.xml");
-            var route = parser.ParseRouteConfig(text);
+            RouteConfig route = parser.ParseRouteConfig(text);
 
             Assert.AreEqual("63", route.Tag);
             Assert.AreEqual("63-Ossington", route.Title);
@@ -57,7 +57,15 @@ namespace NextbusNET.Tests
         }
 
         [Test]
-        public void TestPredictions()
+        public void ParseRouteConfig_should_throw_exception_if_error_message_is_returned_from_nextbus()
+        {
+            var parser = new Parser();
+            string text = File.ReadAllText("xml\\error.xml");
+            Assert.Throws<NextbusException>(() => parser.ParseRouteConfig(text));
+        }
+
+        [Test]
+        public void ParsePrediction_should_return_valid_Prediction_list_object()
         {
             var parser = new Parser();
             var text = File.ReadAllText("xml\\predictions63_2115.xml");
@@ -66,7 +74,15 @@ namespace NextbusNET.Tests
         }
 
         [Test]
-        public void TestSchedule()
+        public void ParsePrediction_should_throw_exception_if_error_message_is_returned_from_nextbus()
+        {
+            var parser = new Parser();
+            string text = File.ReadAllText("xml\\error.xml");
+            Assert.Throws<NextbusException>(() => parser.ParsePrediction(text));
+        }
+
+        [Test]
+        public void ParseSchedule_should_return_valid_RouteSchedule_list_object()
         {
             var parser = new Parser();
             var text = File.ReadAllText("xml\\schedule63.xml");
@@ -93,7 +109,15 @@ namespace NextbusNET.Tests
         }
 
         [Test]
-        public void TestAgengy()
+        public void ParseSchedule_should_throw_exception_if_error_message_is_returned_from_nextbus()
+        {
+            var parser = new Parser();
+            string text = File.ReadAllText("xml\\error.xml");
+            Assert.Throws<NextbusException>(() => parser.ParseSchedule(text));
+        }
+
+        [Test]
+        public void ParseAgencies_should_return_valid_Agency_list_object()
         {
             var parser = new Parser();
             string text = File.ReadAllText("xml\\agencies.xml");
@@ -108,7 +132,15 @@ namespace NextbusNET.Tests
         }
 
         [Test]
-        public void TestRoute()
+        public void ParseAgencies_should_throw_exception_if_error_message_is_returned_from_nextbus()
+        {
+            var parser = new Parser();
+            string text = File.ReadAllText("xml\\error.xml");
+            Assert.Throws<NextbusException>(() => parser.ParseAgencies(text));
+        }
+
+        [Test]
+        public void ParseRoute_should_return_valid_Route_list_object()
         {
             string text = File.ReadAllText("xml\\routes.xml");
             var parser = new Parser();
@@ -121,10 +153,18 @@ namespace NextbusNET.Tests
         }
 
         [Test]
+        public void ParseRoute_should_throw_exception_if_error_message_is_returned_from_nextbus()
+        {
+            var parser = new Parser();
+            string text = File.ReadAllText("xml\\error.xml");
+            Assert.Throws<NextbusException>(() => parser.ParseRoute(text));
+        }
+
+        [Test]
         public void Test()
         {
             var nextbus = new NextbusClient();
-            //var route = nextbus.GetRouteConfig("ttc", "111");
+            var route = nextbus.GetRouteConfig("ttc", "111");
             //nextbus.GetPredictions("ttc", 5905);
             //nextbus.GetPredictions("ttc", "14052", "63");
         }

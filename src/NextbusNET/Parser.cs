@@ -11,6 +11,13 @@ namespace NextbusNET
         {
             XDocument document = XDocument.Parse(xml);
 
+            if (document.Root == null)
+            {
+                return null;
+            }
+
+            TryParseError(document.Root);
+
             XElement routeElement = document.Root.Element("route");
 
             if (routeElement == null)
@@ -79,6 +86,9 @@ namespace NextbusNET
             {
                 return new List<Prediction>();
             }
+
+            TryParseError(document.Root);
+
             List<Prediction> predictions = (from x in document.Root.Descendants("prediction")
                                             select new Prediction
                                                        {
@@ -103,6 +113,8 @@ namespace NextbusNET
             {
                 return new List<RouteSchedule>();
             }
+
+            TryParseError(document.Root);
 
             List<RouteSchedule> routes = (from route in document.Root.Elements("route")
                                           select new RouteSchedule
@@ -132,6 +144,8 @@ namespace NextbusNET
                 return new VehicleList();
             }
 
+            TryParseError(document.Root);
+
             List<Vehicle> vehicles = (from x in document.Root.Elements("vehicle")
                                       select new Vehicle
                                                  {
@@ -160,6 +174,8 @@ namespace NextbusNET
                 return new List<Agency>();
             }
 
+            TryParseError(document.Root);
+
             List<Agency> agencies = (from x in document.Root.Elements("agency")
                                      select new Agency
                                                 {
@@ -179,6 +195,8 @@ namespace NextbusNET
                 return new List<Route>();
             }
 
+            TryParseError(document.Root);
+
             List<Route> routes = (from x in document.Root.Elements("route")
                                   select new Route
                                              {
@@ -188,7 +206,21 @@ namespace NextbusNET
 
             return routes;
         }
+
+        private void TryParseError(XElement root)
+        {
+            XElement element = root.Element("Error");
+            if (element != null)
+            {
+                throw new NextbusException(element.Value)
+                          {
+                              ShouldRetry = element.Attr("shouldRetry").ToBool()
+                          };
+            }
+        }
     }
+
+
 
     public static class XLinqExtensions
     {

@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using NextbusNET.Model;
+using NextbusNET.Properties;
 using RestSharp;
 using System.Xml.Linq;
+using log4net;
 
 namespace NextbusNET
 {
     public class NextbusClient
     {
+        private static readonly ILog Log = LogManager.GetLogger(typeof (NextbusClient));
+
         private readonly IRestClient _client;
 
         private readonly Parser _parser = new Parser();
@@ -21,8 +26,12 @@ namespace NextbusNET
 
         public NextbusClient(IRestClient client)
         {
+            Log.Debug("Initializing client");
+
             _client = client;
-            client.BaseUrl = "http://webservices.nextbus.com/service/publicXMLFeed";
+            client.BaseUrl = Resources.BaseUrl;
+
+            Log.Debug(string.Format("BaseUrl: {0}", client.BaseUrl));
         }
 
         public VehicleList GetVehicles(string agency, string route, int epoch)
@@ -32,7 +41,7 @@ namespace NextbusNET
             request.AddParameter("a", agency);
             request.AddParameter("r", route);
             request.AddParameter("t", epoch);
-            RestResponse response = _client.Execute(request);
+            IRestResponse response = ExecuteRequest(request);
             VehicleList vehicles = _parser.ParseVehicle(response.Content);
             return vehicles;
         }
@@ -41,7 +50,7 @@ namespace NextbusNET
         {
             var request = new RestRequest();
             request.AddParameter("command", "agencyList");
-            var response = _client.Execute(request);
+            IRestResponse response = ExecuteRequest(request);
             IEnumerable<Agency> agencies = _parser.ParseAgencies(response.Content);
             return agencies;
         }
@@ -51,7 +60,7 @@ namespace NextbusNET
             var request = new RestRequest();
             request.AddParameter("command", "routeList");
             request.AddParameter("a", agencyTag);
-            var response = _client.Execute(request);
+            IRestResponse response = ExecuteRequest(request);
             return _parser.ParseRoute(response.Content);
         }
 
@@ -61,7 +70,7 @@ namespace NextbusNET
             request.AddParameter("command", "routeConfig");
             request.AddParameter("a", agencyTag);
             request.AddParameter("r", routeTag);
-            RestResponse response = _client.Execute(request);
+            IRestResponse response = ExecuteRequest(request);
             var route = _parser.ParseRouteConfig(response.Content);
             return route;
         }
@@ -76,7 +85,7 @@ namespace NextbusNET
             {
                 request.AddParameter("routeTag", routeTag);
             }
-            var response = _client.Execute(request);
+            IRestResponse response = ExecuteRequest(request);
             var predictions = _parser.ParsePrediction(response.Content);
             return predictions;
         }
@@ -88,7 +97,7 @@ namespace NextbusNET
             request.AddParameter("a", agencyTag);
             request.AddParameter("r", routeTag);
             request.AddParameter("s", stopTag);
-            var response = _client.Execute(request);
+            IRestResponse response = ExecuteRequest(request);
             var predictions = _parser.ParsePrediction(response.Content);
             return predictions;
         }
@@ -99,7 +108,7 @@ namespace NextbusNET
             request.AddParameter("command", "schedule");
             request.AddParameter("a", agencyTag);
             request.AddParameter("r", routeTag);
-            var response = _client.Execute(request);
+            IRestResponse response = ExecuteRequest(request);
             List<RouteSchedule> routeSchedules = _parser.ParseSchedule(response.Content);
             return routeSchedules;
         }
@@ -113,10 +122,23 @@ namespace NextbusNET
             {
                 request.AddParameter("stops", routeTag);                
             }
-            var response = _client.Execute(request);
+            IRestResponse response = ExecuteRequest(request);
             List<Prediction> predictions = _parser.ParsePrediction(response.Content);
             return predictions;
         }
 
+        private IRestResponse ExecuteRequest(IRestRequest request)
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            IRestResponse response = _client.Execute(request);
+            stopwatch.Stop();
+            if (response.ResponseStatus != ResponseStatus.Completed)
+            {
+                throw new NextbusException(response.ErrorMessage, response.ErrorException);
+            }
+            Log.Debug(string.Format("uri: {0} / time: {1} ms", response.ResponseUri, stopwatch.ElapsedMilliseconds));
+            return response;
+        }
     }
 }
