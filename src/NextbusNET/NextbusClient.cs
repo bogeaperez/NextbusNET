@@ -12,7 +12,7 @@ using log4net;
 
 namespace NextbusNET
 {
-    public class NextbusClient
+    public class NextbusClient : INextbusClient
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof (NextbusClient));
 
