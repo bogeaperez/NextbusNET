@@ -23,5 +23,10 @@ namespace NextbusNET.Model
         public string Vehicle { get; set; }
 
         public string Block { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Vehicle: {0}, TripTag: {1}, Seconds: {2}, DirTag: {3}", Vehicle, TripTag, Seconds, DirTag);
+        }
     }
 }
