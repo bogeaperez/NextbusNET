@@ -20,6 +20,8 @@ namespace NextbusNET
 
         private readonly Parser _parser = new Parser();
 
+        private readonly RequestFactory _factory = new RequestFactory();
+
         public NextbusClient() : this(new RestClient())
         {
         }
@@ -36,11 +38,7 @@ namespace NextbusNET
 
         public VehicleList GetVehicles(string agency, string route, int epoch)
         {
-            var request = new RestRequest();
-            request.AddParameter("command", "vehicleLocations");
-            request.AddParameter("a", agency);
-            request.AddParameter("r", route);
-            request.AddParameter("t", epoch);
+            var request = _factory.CreateVehiclesRequest(agency, route, epoch);
             IRestResponse response = ExecuteRequest(request);
             VehicleList vehicles = _parser.ParseVehicle(response.Content);
             return vehicles;
@@ -48,8 +46,7 @@ namespace NextbusNET
 
         public IEnumerable<Agency> GetAgencies()
         {
-            var request = new RestRequest();
-            request.AddParameter("command", "agencyList");
+            var request = _factory.CreateAgenciesRequest();
             IRestResponse response = ExecuteRequest(request);
             IEnumerable<Agency> agencies = _parser.ParseAgencies(response.Content);
             return agencies;
@@ -57,19 +54,14 @@ namespace NextbusNET
 
         public IEnumerable<Route> GetRoutes(string agencyTag)
         {
-            var request = new RestRequest();
-            request.AddParameter("command", "routeList");
-            request.AddParameter("a", agencyTag);
+            var request = _factory.CreateRoutesRequest(agencyTag);
             IRestResponse response = ExecuteRequest(request);
             return _parser.ParseRoute(response.Content);
         }
 
         public RouteConfig GetRouteConfig(string agencyTag, string routeTag)
         {
-            var request = new RestRequest();
-            request.AddParameter("command", "routeConfig");
-            request.AddParameter("a", agencyTag);
-            request.AddParameter("r", routeTag);
+            var request = _factory.CreateRouteConfigRequest(agencyTag, routeTag);
             IRestResponse response = ExecuteRequest(request);
             var route = _parser.ParseRouteConfig(response.Content);
             return route;
@@ -77,14 +69,7 @@ namespace NextbusNET
 
         public IEnumerable<Prediction> GetPredictions(string agencyTag, int stopId, string routeTag = null)
         {
-            var request = new RestRequest();
-            request.AddParameter("command", "predictions");
-            request.AddParameter("a", agencyTag);
-            request.AddParameter("stopId", stopId);
-            if (routeTag != null)
-            {
-                request.AddParameter("routeTag", routeTag);
-            }
+            var request = _factory.CreatePredictionsRequest(agencyTag, stopId, routeTag);
             IRestResponse response = ExecuteRequest(request);
             var predictions = _parser.ParsePrediction(response.Content);
             return predictions;
@@ -92,11 +77,7 @@ namespace NextbusNET
 
         public IEnumerable<Prediction> GetPredictions(string agencyTag, string stopTag, string routeTag)
         {
-            var request = new RestRequest();
-            request.AddParameter("command", "predictions");
-            request.AddParameter("a", agencyTag);
-            request.AddParameter("r", routeTag);
-            request.AddParameter("s", stopTag);
+            var request = _factory.CreatePredictionsRequest(agencyTag, stopTag, routeTag);
             IRestResponse response = ExecuteRequest(request);
             var predictions = _parser.ParsePrediction(response.Content);
             return predictions;
@@ -104,10 +85,7 @@ namespace NextbusNET
 
         public IEnumerable<RouteSchedule> GetSchedule(string agencyTag, string routeTag)
         {
-            var request = new RestRequest();
-            request.AddParameter("command", "schedule");
-            request.AddParameter("a", agencyTag);
-            request.AddParameter("r", routeTag);
+            var request = _factory.CreateScheduleRequest(agencyTag, routeTag);
             IRestResponse response = ExecuteRequest(request);
             List<RouteSchedule> routeSchedules = _parser.ParseSchedule(response.Content);
             return routeSchedules;
@@ -115,13 +93,7 @@ namespace NextbusNET
 
         public IEnumerable<Prediction> GetPredictionsForMultiStops(string agencyTag, params string[] routeTags)
         {
-            var request = new RestRequest();
-            request.AddParameter("command", "predictionsForMultiStops");
-            request.AddParameter("a", agencyTag);
-            foreach (var routeTag in routeTags)
-            {
-                request.AddParameter("stops", routeTag);                
-            }
+            var request = _factory.CreatePredictionsForMultiStopsRequest(agencyTag, routeTags);
             IRestResponse response = ExecuteRequest(request);
             List<Prediction> predictions = _parser.ParsePrediction(response.Content);
             return predictions;
