@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="INextbusAsyncClient.cs" />
+    <Compile Include="INextbusClient.cs" />
+    <Compile Include="NextbusAsyncClient.cs" />
     <Compile Include="NextbusException.cs" />
     <Compile Include="Model\Agency.cs" />
     <Compile Include="Model\Direction.cs" />
@@ -72,6 +75,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RequestFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
