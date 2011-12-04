@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
@@ -163,10 +164,19 @@ namespace NextbusNET.Tests
         [Test]
         public void Test()
         {
-            var nextbus = new NextbusClient();
-            var route = nextbus.GetRouteConfig("ttc", "111");
+            var nextbus = new NextbusAsyncClient();
+            //var route = nextbus.GetRouteConfig("ttc", "111");
             //nextbus.GetPredictions("ttc", 5905);
-            //nextbus.GetPredictions("ttc", "14052", "63");
+            var predictions = nextbus.GetPredictions("ttc", "9354", "32");
+            var predictions2 = nextbus.GetPredictions("ttc", "7937", "32").Result;
+            VehicleList vehicles = nextbus.GetVehicles("ttc", "32", GetEpoch()).Result;
+        }
+
+        static int GetEpoch()
+        {
+            TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+            int timestamp = (int)t.TotalSeconds;
+            return timestamp;
         }
     }
 }
