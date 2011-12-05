@@ -10,4 +10,5 @@ Usage
 -----
 
 var client = new NextbusClient();
+
 IEnumerable<Agency> agencies = client.GetAgencies();
