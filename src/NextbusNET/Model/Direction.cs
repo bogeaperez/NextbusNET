@@ -2,18 +2,41 @@ using System.Collections.Generic;
 
 namespace NextbusNET.Model
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Direction
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Tag { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool UserForUI { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<Stop> Stops { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(Direction other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -34,11 +57,23 @@ namespace NextbusNET.Model
             return (Tag != null ? Tag.GetHashCode() : 0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator ==(Direction left, Direction right)
         {
             return Equals(left, right);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator !=(Direction left, Direction right)
         {
             return !Equals(left, right);

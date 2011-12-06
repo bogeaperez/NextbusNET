@@ -3,10 +3,19 @@ using System.Linq;
 
 namespace NextbusNET.Model
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class VehicleList
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public IEnumerable<Vehicle> Vehicles { get; internal set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int LastTime { get; internal set; }
 
         public override string ToString()

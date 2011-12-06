@@ -4,9 +4,9 @@ using RestSharp;
 
 namespace NextbusNET
 {
-    public class RequestFactory
+    internal class RequestFactory
     {
-        public RestRequest CreateVehiclesRequest(string agency, string route, int epoch)
+        internal RestRequest CreateVehiclesRequest(string agency, string route, int epoch)
         {
             var request = new RestRequest();
             request.AddParameter("command", "vehicleLocations");
@@ -16,14 +16,14 @@ namespace NextbusNET
             return request;
         }
 
-        public RestRequest CreateAgenciesRequest()
+        internal RestRequest CreateAgenciesRequest()
         {
             var request = new RestRequest();
             request.AddParameter("command", "agencyList");
             return request;
         }
 
-        public RestRequest CreateRoutesRequest(string agencyTag)
+        internal RestRequest CreateRoutesRequest(string agencyTag)
         {
             var request = new RestRequest();
             request.AddParameter("command", "routeList");
@@ -31,7 +31,7 @@ namespace NextbusNET
             return request;
         }
 
-        public RestRequest CreateRouteConfigRequest(string agencyTag, string routeTag)
+        internal RestRequest CreateRouteConfigRequest(string agencyTag, string routeTag)
         {
             var request = new RestRequest();
             request.AddParameter("command", "routeConfig");
@@ -40,7 +40,7 @@ namespace NextbusNET
             return request;
         }
 
-        public RestRequest CreatePredictionsRequest(string agencyTag, int stopId, string routeTag = null)
+        internal RestRequest CreatePredictionsRequest(string agencyTag, int stopId, string routeTag = null)
         {
             var request = new RestRequest();
             request.AddParameter("command", "predictions");
@@ -53,7 +53,7 @@ namespace NextbusNET
             return request;
         }
 
-        public RestRequest CreatePredictionsRequest(string agencyTag, string stopTag, string routeTag)
+        internal RestRequest CreatePredictionsRequest(string agencyTag, string stopTag, string routeTag)
         {
             var request = new RestRequest();
             request.AddParameter("command", "predictions");
@@ -63,7 +63,7 @@ namespace NextbusNET
             return request;
         }
 
-        public RestRequest CreateScheduleRequest(string agencyTag, string routeTag)
+        internal RestRequest CreateScheduleRequest(string agencyTag, string routeTag)
         {
             var request = new RestRequest();
             request.AddParameter("command", "schedule");
@@ -72,7 +72,7 @@ namespace NextbusNET
             return request;
         }
 
-        public RestRequest CreatePredictionsForMultiStopsRequest(string agencyTag, params string[] routeTags)
+        internal RestRequest CreatePredictionsForMultiStopsRequest(string agencyTag, params string[] routeTags)
         {
             var request = new RestRequest();
             request.AddParameter("command", "predictionsForMultiStops");

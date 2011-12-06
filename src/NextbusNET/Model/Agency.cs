@@ -1,13 +1,30 @@
 namespace NextbusNET.Model
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Agency
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Tag { get; internal set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Title { get; internal set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string RegionTitle { get; internal set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(Agency other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -28,11 +45,23 @@ namespace NextbusNET.Model
             return (Tag != null ? Tag.GetHashCode() : 0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator ==(Agency left, Agency right)
         {
             return Equals(left, right);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator !=(Agency left, Agency right)
         {
             return !Equals(left, right);

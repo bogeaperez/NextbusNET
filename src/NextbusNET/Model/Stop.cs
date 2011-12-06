@@ -1,17 +1,40 @@
 namespace NextbusNET.Model
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Stop
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Tag { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public decimal Lat { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public decimal Lon { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int StopId { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(Stop other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -32,11 +55,23 @@ namespace NextbusNET.Model
             return (Tag != null ? Tag.GetHashCode() : 0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator ==(Stop left, Stop right)
         {
             return Equals(left, right);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator !=(Stop left, Stop right)
         {
             return !Equals(left, right);

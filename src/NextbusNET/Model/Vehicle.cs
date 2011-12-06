@@ -1,21 +1,48 @@
 ﻿namespace NextbusNET.Model
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Vehicle
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Id { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string RouteTag { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string DirTag { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public decimal Lat { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public decimal Lon { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int SecsSinceReport { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Predictable { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Heading { get; set; }
 
         public bool Equals(Vehicle other)
@@ -50,7 +77,8 @@
 
         public override string ToString()
         {
-            return string.Format("Id: {0}, RouteTag: {1}, SecsSinceReport: {2}, DirTag: {3}", Id, RouteTag, SecsSinceReport, DirTag);
+            return string.Format("Id: {0}, RouteTag: {1}, SecsSinceReport: {2}, DirTag: {3}", Id, RouteTag,
+                                 SecsSinceReport, DirTag);
         }
     }
 }
