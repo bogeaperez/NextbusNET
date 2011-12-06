@@ -37,6 +37,7 @@ task compile -depends clean {
 task dist {
 	create_directory $dist_dir\lib\net40
 	copy-item "$build_dir\NextbusNET.dll" "$dist_dir\lib\net40"
+	copy-item "$build_dir\NextbusNET.XML" "$dist_dir\lib\net40"
 	copy-item "$base_dir\NextbusNET.nuspec" "$dist_dir"
 
     exec { & $tools_dir\NuGet.exe pack $dist_dir\NextbusNET.nuspec -Symbols }
