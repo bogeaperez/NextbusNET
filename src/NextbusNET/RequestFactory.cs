@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-using NextbusNET.Model;
-using RestSharp;
+﻿using NextbusNET.Model;
 
 namespace NextbusNET
 {
     internal class RequestFactory
     {
-        internal RestRequest CreateVehiclesRequest(string agency, string route, int epoch)
+        internal Request CreateVehiclesRequest(string agency, string route, int epoch)
         {
-            var request = new RestRequest();
+            var request = new Request();
             request.AddParameter("command", "vehicleLocations");
             request.AddParameter("a", agency);
             request.AddParameter("r", route);
@@ -16,33 +14,33 @@ namespace NextbusNET
             return request;
         }
 
-        internal RestRequest CreateAgenciesRequest()
+        internal Request CreateAgenciesRequest()
         {
-            var request = new RestRequest();
+            var request = new Request();
             request.AddParameter("command", "agencyList");
             return request;
         }
 
-        internal RestRequest CreateRoutesRequest(string agencyTag)
+        internal Request CreateRoutesRequest(string agencyTag)
         {
-            var request = new RestRequest();
+            var request = new Request();
             request.AddParameter("command", "routeList");
             request.AddParameter("a", agencyTag);
             return request;
         }
 
-        internal RestRequest CreateRouteConfigRequest(string agencyTag, string routeTag)
+        internal Request CreateRouteConfigRequest(string agencyTag, string routeTag)
         {
-            var request = new RestRequest();
+            var request = new Request();
             request.AddParameter("command", "routeConfig");
             request.AddParameter("a", agencyTag);
             request.AddParameter("r", routeTag);
             return request;
         }
 
-        internal RestRequest CreatePredictionsRequest(string agencyTag, int stopId, string routeTag = null)
+        internal Request CreatePredictionsRequest(string agencyTag, int stopId, string routeTag = null)
         {
-            var request = new RestRequest();
+            var request = new Request();
             request.AddParameter("command", "predictions");
             request.AddParameter("a", agencyTag);
             request.AddParameter("stopId", stopId);
@@ -53,9 +51,9 @@ namespace NextbusNET
             return request;
         }
 
-        internal RestRequest CreatePredictionsRequest(string agencyTag, string stopTag, string routeTag)
+        internal Request CreatePredictionsRequest(string agencyTag, string stopTag, string routeTag)
         {
-            var request = new RestRequest();
+            var request = new Request();
             request.AddParameter("command", "predictions");
             request.AddParameter("a", agencyTag);
             request.AddParameter("r", routeTag);
@@ -63,18 +61,18 @@ namespace NextbusNET
             return request;
         }
 
-        internal RestRequest CreateScheduleRequest(string agencyTag, string routeTag)
+        internal Request CreateScheduleRequest(string agencyTag, string routeTag)
         {
-            var request = new RestRequest();
+            var request = new Request();
             request.AddParameter("command", "schedule");
             request.AddParameter("a", agencyTag);
             request.AddParameter("r", routeTag);
             return request;
         }
 
-        internal RestRequest CreatePredictionsForMultiStopsRequest(string agencyTag, params string[] routeTags)
+        internal Request CreatePredictionsForMultiStopsRequest(string agencyTag, params string[] routeTags)
         {
-            var request = new RestRequest();
+            var request = new Request();
             request.AddParameter("command", "predictionsForMultiStops");
             request.AddParameter("a", agencyTag);
             foreach (var routeTag in routeTags)
