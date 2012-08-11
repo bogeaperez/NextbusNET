@@ -10,9 +10,5 @@
    <projectUrl>http://github.com/bogeaperez/NextbusNET</projectUrl>
    <requireLicenseAcceptance>false</requireLicenseAcceptance>
    <tags>nextbus</tags>
-   <dependencies>
-      <dependency id="log4net" />
-      <dependency id="RestSharp" />
-   </dependencies>
  </metadata>
 </package>
