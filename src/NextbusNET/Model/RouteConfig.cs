@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NextbusNET.Model
 {
@@ -66,6 +67,16 @@ namespace NextbusNET.Model
         /// 
         /// </summary>
         public List<Path> Paths { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        public Direction GetDirection(string tag)
+        {
+            return Directions.Single(x => x.Tag == tag);
+        }
 
         /// <summary>
         /// 

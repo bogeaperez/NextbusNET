@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using NextbusNET.Model;
-using NextbusNET.Properties;
 using System.Xml.Linq;
 
 namespace NextbusNET
@@ -83,18 +82,8 @@ namespace NextbusNET
 
         private string ExecuteRequest(Request request)
         {
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    Task<string> responseBody = client.GetStringAsync(request.ToString());
-                    return responseBody.Result;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new NextbusException("Error", e);
-            }
+            var http = new Http();
+            return http.Execute(request).Result;
         }
     }
 }

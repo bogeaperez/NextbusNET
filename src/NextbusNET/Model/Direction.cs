@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NextbusNET.Model
 {
@@ -30,7 +31,12 @@ namespace NextbusNET.Model
         /// <summary>
         /// 
         /// </summary>
-        public IList<Stop> Stops { get; set; }
+        public List<Stop> Stops { get; set; }
+
+        public Stop GetStop(string tag)
+        {
+            return Stops.Single(x => x.Tag == tag);
+        }
 
         /// <summary>
         /// 

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D152715B-674D-400F-B2F7-DB5947A91C62}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NextbusNET</RootNamespace>
+    <AssemblyName>NextbusNET4.5</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\NextbusNET\IHttp.cs">
+      <Link>IHttp.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\INextbusAsyncClient.cs">
+      <Link>INextbusAsyncClient.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\INextbusClient.cs">
+      <Link>INextbusClient.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\Agency.cs">
+      <Link>Model\Agency.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\Direction.cs">
+      <Link>Model\Direction.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\Path.cs">
+      <Link>Model\Path.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\Point.cs">
+      <Link>Model\Point.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\Prediction.cs">
+      <Link>Model\Prediction.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\Route.cs">
+      <Link>Model\Route.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\RouteConfig.cs">
+      <Link>Model\RouteConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\RouteSchedule.cs">
+      <Link>Model\RouteSchedule.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\Stop.cs">
+      <Link>Model\Stop.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\StopSchedule.cs">
+      <Link>Model\StopSchedule.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\Vehicle.cs">
+      <Link>Model\Vehicle.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Model\VehicleList.cs">
+      <Link>Model\VehicleList.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\NextbusAsyncClient.cs">
+      <Link>NextbusAsyncClient.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\NextbusClient.cs">
+      <Link>NextbusClient.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\NextbusException.cs">
+      <Link>NextbusException.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Parser.cs">
+      <Link>Parser.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\Request.cs">
+      <Link>Request.cs</Link>
+    </Compile>
+    <Compile Include="..\NextbusNET\RequestFactory.cs">
+      <Link>RequestFactory.cs</Link>
+    </Compile>
+    <Compile Include="Http.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NextbusNET</RootNamespace>
     <AssemblyName>NextbusNET</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Http.cs" />
+    <Compile Include="IHttp.cs" />
     <Compile Include="INextbusAsyncClient.cs" />
     <Compile Include="INextbusClient.cs" />
     <Compile Include="NextbusAsyncClient.cs" />

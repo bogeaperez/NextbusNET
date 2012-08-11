@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using NextbusNET.Model;
-using NextbusNET.Properties;
 using System.Net.Http;
 
 namespace NextbusNET
@@ -64,20 +63,10 @@ namespace NextbusNET
             return ExecuteRequest(request).ContinueWith(x => _parser.ParsePrediction(x.Result));
         }
 
-        private async Task<string> ExecuteRequest(Request request)
+        private Task<string> ExecuteRequest(Request request)
         {
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    string responseBody = await client.GetStringAsync(request.ToString());
-                    return responseBody;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new NextbusException("Error", e);
-            }
+            var http = new Http();
+            return http.Execute(request);
         }
     }
 }

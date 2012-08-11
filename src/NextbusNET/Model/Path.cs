@@ -11,7 +11,7 @@ namespace NextbusNET.Model
         /// <summary>
         /// 
         /// </summary>
-        public IEnumerable<Point> Points { get; internal set; }
+        public List<Point> Points { get; internal set; }
 
         public override string ToString()
         {
