@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using NextbusNET.Properties;
 
 namespace NextbusNET
 {
@@ -15,7 +16,7 @@ namespace NextbusNET
         public override string ToString()
         {
             IEnumerable<string> parameters = _parameters.Select(x => string.Format("{0}={1}", x.Key, x.Value));
-            return @"http://webservices.nextbus.com/service/publicXMLFeed?" + string.Join("&", parameters);
+            return Settings.Default.BaseUrl + "?" + string.Join("&", parameters);
         }
     }
 }
