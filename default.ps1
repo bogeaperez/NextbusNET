@@ -1,5 +1,5 @@
-$framework = '4.0x86'
-$version = '1.0.1'
+$framework = '4.0'
+$version = '1.1.0'
 
 properties {
 	$base_dir = resolve-path .
@@ -16,10 +16,8 @@ properties {
 }
 
 
-task default -depends compile, dist
-task local -depends compile, test
-task full -depends local, dist
-task ci -depends clean, release, commonAssemblyInfo, local, dist
+task default -depends compile
+task full -depends release, update-assemblyInfo, local, package
 
 task clean {
 	delete_directory "$build_dir"
@@ -31,13 +29,38 @@ task release {
 }
 
 task compile -depends clean { 
-    exec { msbuild /t:Clean /t:Build /p:Configuration=$config /p:OutDir=$build_dir /v:q /nologo $source_dir\Nextbus.NET.sln }
+    exec { msbuild /t:Clean /t:Build /p:Configuration=$config /p:OutDir=$build_dir\net40 /v:q /nologo $source_dir\NextbusNET\NextbusNET.csproj }
+    exec { msbuild /t:Clean /t:Build /p:Configuration=$config /p:OutDir=$build_dir\tests /v:q /nologo $source_dir\NextbusNET.Tests\NextbusNET.Tests.csproj }
+    exec { msbuild /t:Clean /t:Build /p:Configuration=$config /p:OutDir=$build_dir\net45 /v:q /nologo $source_dir\NextbusNET4.5\NextbusNET4.5.csproj }
 }
 
-task dist {
+task update-nuspec {
+	$filename = "$base_dir\NextbusNET.nuspec"
+	$content = [xml] (Get-Content $filename)
+	$content.package.metadata.version = $version
+	$content.Save($filename)
+}
+
+task update-assemblyInfo {
+	$filename = "$source_dir\CommonAssemblyInfo.cs"
+	$assemblyVersionPattern = 'AssemblyVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
+    $fileVersionPattern = 'AssemblyFileVersion\("[0-9]+(\.([0-9]+|\*)){1,3}"\)'
+    $assemblyVersion = 'AssemblyVersion("' + $version.Substring(0,3) + '.0.0")';
+    $fileVersion = 'AssemblyFileVersion("' + $version + '.0")';
+
+	$content = Get-Content $filename
+	$content = $content -replace $assemblyVersionPattern, $assemblyVersion
+	$content = $content -replace $fileVersionPattern, $fileVersion
+	$content | Set-Content $filename
+}
+
+task package -depends update-nuspec {
 	create_directory $dist_dir\lib\net40
-	copy-item "$build_dir\NextbusNET.dll" "$dist_dir\lib\net40"
-	copy-item "$build_dir\NextbusNET.XML" "$dist_dir\lib\net40"
+	create_directory $dist_dir\lib\net45
+	copy-item "$build_dir\net40\NextbusNET.dll" "$dist_dir\lib\net40"
+	copy-item "$build_dir\net40\NextbusNET.XML" "$dist_dir\lib\net40"
+	copy-item "$build_dir\net40\NextbusNET.XML" "$dist_dir\lib\net45"
+	copy-item "$build_dir\net45\NextbusNET.dll" "$dist_dir\lib\net45"
 	copy-item "$base_dir\NextbusNET.nuspec" "$dist_dir"
 
     exec { & $tools_dir\NuGet.exe pack $dist_dir\NextbusNET.nuspec -Symbols }
