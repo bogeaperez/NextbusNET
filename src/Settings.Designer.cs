@@ -23,15 +23,12 @@ namespace NextbusNET.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://webservices.nextbus.com/service/publicXMLFeed")]
         public string BaseUrl {
             get {
                 return ((string)(this["BaseUrl"]));
-            }
-            set {
-                this["BaseUrl"] = value;
             }
         }
     }

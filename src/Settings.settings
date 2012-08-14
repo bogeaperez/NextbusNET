@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NextbusNET.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="BaseUrl" Type="System.String" Scope="User">
+    <Setting Name="BaseUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://webservices.nextbus.com/service/publicXMLFeed</Value>
     </Setting>
   </Settings>
