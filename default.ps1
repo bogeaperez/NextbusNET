@@ -17,7 +17,7 @@ properties {
 
 
 task default -depends compile
-task full -depends release, update-assemblyInfo, local, package
+task full -depends release, update-assemblyInfo, default, package
 
 task clean {
 	delete_directory "$build_dir"
@@ -58,9 +58,11 @@ task package -depends update-nuspec {
 	create_directory $dist_dir\lib\net40
 	create_directory $dist_dir\lib\net45
 	copy-item "$build_dir\net40\NextbusNET.dll" "$dist_dir\lib\net40"
+	copy-item "$build_dir\net40\NextbusNET.dll.config" "$dist_dir\lib\net40"
 	copy-item "$build_dir\net40\NextbusNET.XML" "$dist_dir\lib\net40"
 	copy-item "$build_dir\net40\NextbusNET.XML" "$dist_dir\lib\net45"
 	copy-item "$build_dir\net45\NextbusNET.dll" "$dist_dir\lib\net45"
+	copy-item "$build_dir\net45\NextbusNET.dll.config" "$dist_dir\lib\net45"
 	copy-item "$base_dir\NextbusNET.nuspec" "$dist_dir"
 
     exec { & $tools_dir\NuGet.exe pack $dist_dir\NextbusNET.nuspec -Symbols }
