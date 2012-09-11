@@ -1,9 +1,9 @@
-$framework = '4.0'
+$framework = '4.0x86'
 $version = '1.1.0'
 
 properties {
 	$base_dir = resolve-path .
-	$build_dir = "$base_dir\build\"
+	$build_dir = "$base_dir\build"
 	$dist_dir = "$base_dir\release"
 	$source_dir = "$base_dir\src"
 	$tools_dir = "$base_dir\tools"
@@ -29,9 +29,10 @@ task release {
 }
 
 task compile -depends clean { 
-    exec { msbuild /t:Clean /t:Build /p:Configuration=$config /p:OutDir=$build_dir\net40 /v:q /nologo $source_dir\NextbusNET\NextbusNET.csproj }
-    exec { msbuild /t:Clean /t:Build /p:Configuration=$config /p:OutDir=$build_dir\tests /v:q /nologo $source_dir\NextbusNET.Tests\NextbusNET.Tests.csproj }
-    exec { msbuild /t:Clean /t:Build /p:Configuration=$config /p:OutDir=$build_dir\net45 /v:q /nologo $source_dir\NextbusNET4.5\NextbusNET4.5.csproj }
+    exec { msbuild /t:Clean /t:Build /p:Configuration=$config /p:OutputPath=$build_dir\net40 /v:q /nologo $source_dir\NextbusNET\NextbusNET.csproj }
+    exec { msbuild /t:Clean /t:Build /p:Configuration=$config /p:OutputPath=$build_dir\tests /v:q /nologo $source_dir\NextbusNET.Tests\NextbusNET.Tests.csproj }
+    exec { msbuild /t:Clean /t:Build /p:Configuration=$config /p:OutputPath=$build_dir\net45 /v:q /nologo $source_dir\NextbusNET4.5\NextbusNET4.5.csproj }
+	exec { msbuild "/t:Clean;Build" /p:Configuration=$config /p:OutputPath=$build_dir\winrt45 "/p:DefineConstants=NETFX_CORE" $source_dir\NextbusNET.Metro\NextbusNET.Metro.csproj }
 }
 
 task update-nuspec {
@@ -57,12 +58,16 @@ task update-assemblyInfo {
 task package -depends update-nuspec {
 	create_directory $dist_dir\lib\net40
 	create_directory $dist_dir\lib\net45
+	create_directory $dist_dir\lib\winrt45
 	copy-item "$build_dir\net40\NextbusNET.dll" "$dist_dir\lib\net40"
 	copy-item "$build_dir\net40\NextbusNET.dll.config" "$dist_dir\lib\net40"
 	copy-item "$build_dir\net40\NextbusNET.XML" "$dist_dir\lib\net40"
 	copy-item "$build_dir\net40\NextbusNET.XML" "$dist_dir\lib\net45"
+	copy-item "$build_dir\net40\NextbusNET.XML" "$dist_dir\lib\winrt45"
 	copy-item "$build_dir\net45\NextbusNET.dll" "$dist_dir\lib\net45"
 	copy-item "$build_dir\net45\NextbusNET.dll.config" "$dist_dir\lib\net45"
+	copy-item "$build_dir\net45\NextbusNET.dll" "$dist_dir\lib\winrt45"
+
 	copy-item "$base_dir\NextbusNET.nuspec" "$dist_dir"
 
     exec { & $tools_dir\NuGet.exe pack $dist_dir\NextbusNET.nuspec -Symbols }
