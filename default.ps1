@@ -1,5 +1,5 @@
 $framework = '4.0x86'
-$version = '1.1.0'
+$version = '1.2.0'
 
 properties {
 	$base_dir = resolve-path .
@@ -66,7 +66,7 @@ task package -depends update-nuspec {
 	copy-item "$build_dir\net40\NextbusNET.XML" "$dist_dir\lib\winrt45"
 	copy-item "$build_dir\net45\NextbusNET.dll" "$dist_dir\lib\net45"
 	copy-item "$build_dir\net45\NextbusNET.dll.config" "$dist_dir\lib\net45"
-	copy-item "$build_dir\net45\NextbusNET.dll" "$dist_dir\lib\winrt45"
+	copy-item "$build_dir\winrt45\NextbusNET.dll" "$dist_dir\lib\winrt45"
 
 	copy-item "$base_dir\NextbusNET.nuspec" "$dist_dir"
 
